@@ -13,13 +13,14 @@
         }
 
         body {
-            background-color: #1a0f0d;
+            background-color: #1b0f0f;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
             perspective: 1000px;
+            user-select: none;
         }
 
         .card-title {
@@ -30,10 +31,10 @@
         }
 
         .card {
-            background: linear-gradient(135deg, #ad422d, #e6723c);
+            background: linear-gradient(135deg, #7c2d1d, #cb5f2c);
             padding: 3rem;
             border-radius: 16px;
-            width: 90%;
+            width: 50%;
             max-width: 800px;
             display: flex;
             align-items: center;
@@ -43,6 +44,7 @@
             position: relative;
             overflow: hidden;
             color: white;
+            transform: rotate3d(1, 0.5, 0, 35deg) scale(0.6);
         }
 
         .card::before {
@@ -113,6 +115,12 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
+        @media (max-width: 768px) {
+            .coming-soon {
+                display: block;
+            }
+        }
+
         .subtitle {
             color: rgba(255, 255, 255, 0.9);
             font-size: 0.89rem;
@@ -179,6 +187,15 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @keyframes landCard {
+            from {
+                transform: rotate3d(80, 40, 0, 50deg) scale(0.6) translateZ(50px);
+            }
+            to {
+                transform: rotate3d(0, 0, 0, 0deg) scale(0.6) translateZ(0px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -186,7 +203,7 @@
    
         <div class="right-section">
             <h1 class="card-title">NOUR <small style="font-size: 20px;">PRO</small></h1>
-            <p class="subtitle">We're working hard to bring you something amazing<span class="coming-soon">. comming soon</span></p>
+            <p class="subtitle">We're working hard to bring you something amazing.<span class="coming-soon">comming soon</span></p>
             <div class="details">
                 <div class="detail-item">🌟 Comprehensive Services</div>
                 <div class="detail-item">🚀  Rapid & Efficient Solutions</div>
@@ -208,11 +225,11 @@
                 const rotateX = (y - centerY) / 70;
                 const rotateY = -(x - centerX) / 70;
 
-                card.style.transform = `rotate3d(${rotateX}, ${rotateY}, 0, ${Math.sqrt(rotateX * rotateX + rotateY * rotateY)}deg)`;
+                card.style.transform = `rotate3d(${rotateX}, ${rotateY}, 0, ${Math.sqrt(rotateX * rotateX + rotateY * rotateY)}deg) scale(0.6)`;
             });
 
             document.addEventListener('mouseout', () => {
-                card.style.transform = 'rotate3d(0, 0, 0, 0deg)';
+                card.style.transform = 'scale(0.6) rotate3d(0, 0, 0, 0deg)';
             });
         });
     </script>
